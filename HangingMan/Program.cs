@@ -11,25 +11,26 @@ namespace HangingMan
 
             Random rnd = new Random();
 
-            bool eject = false;
-            bool handlerWizard = false;
+            bool eject = false; // used to shut down any logic(stop game)
+            bool handlerWizard = false; // used to solve switch and simular
 
-            bool randomQuestionMark = false;
+            bool randomQuestionMark = false; // governs word selection
 
-            bool winQuestionMark = false;
+            bool winQuestionMark = false; // used to solve win condition
 
-            int difficulty = 0;
+            int difficulty = 0; // governs selection of word arrays
 
-            string[] wordsDifficultyQuestionMark = null;
-            string[] censorshipEngagedWord = null;
-            string[] winWord = null;
+            string[] wordsDifficultyQuestionMark = null; // gets linked with word arrays, thus creates difficulty
+            string[] censorshipEngagedWord = null; // hidden selected word
+            string[] winWord = null; // selected word which used to solve win logic
 
-            string pickedWord = string.Empty;
+            string pickedWord = string.Empty; // selected word which will be hidden in console
 
 
             string alphabet = "A B C D E F G L M N O P Q R S T U V W X Y Z";
-            int health = 7;
+            int health = 5; // number of attemps avaliable
 
+            //self explainatory
             string easyWords = "Dog Cat Hat Sun Tree Car Fish Bird Moon Cup Apple Mop Star Be Shoe Ball Fox Bush Frog Deer Rock Rain Cap Bed Fan Poo Bee Milk Start Cake Bus Pencil Spoon Van Pear Book Duck Egg Flag Ship Soap Lamp Bread Pot Rose Boot Mug Key Hand Nail Doll Bag Fig Ho Hat Net Nook Star Bo Toad Boat Car Cup Pen Tree Boa Bat Fork Bell Sun Kit Drum Hen Ice Coat";
             string mediumWords = "Python Bumblebee Unicorn Octopus Elephant Jigsaw Galaxy Platypus Falcon Trampoline Igloo Telescope Tyrannosaurus Carousel Lighthouse Parachute Rollercoaster Metamorphosis Galapagos Narwhal Raccoon Marzipan Thermometer Chrysanthemum Iguana Asteroid Gyroscope Mill Noble Blunderbuss Musket Charisma Bombard Folk";
             string expertWords = "Hypnosis Baguette Pterodactyl Fjord Chandelier Pharaoh Kaleidoscope Apothecary Eccentric Chimera Photosynthesis Hologram Atmosphere Nephilim Millennium Centrifugal Phonograph Semaphore Bioluminescence Circumference Electromagnetism Archaeology Fibonacci Parley Handgonne Windlass";
@@ -38,9 +39,10 @@ namespace HangingMan
             string[] mediumDifficultyWords = mediumWords.ToUpper().Split(' ');
             string[] expertDifficultyWords = expertWords.ToUpper().Split(' ');
 
+            //menu
             while (eject.Equals(false))
             {
-                Console.Write("Please select your difficulty:\n Let me play daddy - 1\n Hard - 2\n Le Expert - 3\nDifficulty - ");                //difficulty selection
+                Console.Write("Please select your difficulty:\n Let me play daddy - 1\n Hard - 2\n Le Expert - 3\nEJECT - 998\nDifficulty - ");                //difficulty selection
                 while (handlerWizard.Equals(false))
                 {
                     string difficultySelection = Console.ReadLine();
@@ -49,14 +51,15 @@ namespace HangingMan
                         case "1": Console.Write("Baby difficulty: on..."); difficulty = 1; handlerWizard = true; break;
                         case "2": Console.WriteLine("Good."); difficulty = 2; handlerWizard = true; break;
                         case "3": Console.WriteLine("Wow, Le experto here! We'll see how you will do smarty."); difficulty = 3; handlerWizard = true; break;
+                        case "998": eject = true; break;
                         default: Console.WriteLine("Enter valid number!"); break;
                     }
                 }
-                handlerWizard = false;
+                handlerWizard = false; // sets value to false so next logic would work fine
 
                 while (handlerWizard.Equals(false))
                 {
-                    Console.Write("Do you want to use RANDOM word or nah?\n Aye - 1\n No - 2\nSelection - ");                                      //random selection
+                    Console.Write("Do you want to use RANDOM word?\n Aye - 1\n No - 2\nSelection - ");                                      //random selection
                     string randomSelection = Console.ReadLine();
                     switch (randomSelection)
                     {
